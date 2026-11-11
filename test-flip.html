@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Flip Test</title>
+  <style>
+    body { background: #222; margin: 0; display: flex; justify-content: center; align-items: center; height: 100vh; }
+    #flipbook { width: 640px; height: 460px; }
+    .card-page { width: 320px; height: 460px; background: #faf7f2; border: 1px solid #ddd; padding: 20px; box-sizing: border-box; font-family: serif; }
+  </style>
+</head>
+<body>
+  <div id="flipbook">
+    <div class="card-page" data-density="hard">
+      <h2>Cover</h2>
+      <p>Front cover of card</p>
+    </div>
+    <div class="card-page">
+      <h2>Inside Left</h2>
+      <p>Left inside panel</p>
+    </div>
+    <div class="card-page">
+      <h2>Inside Right</h2>
+      <p>Right inside panel</p>
+    </div>
+    <div class="card-page" data-density="hard">
+      <h2>Back</h2>
+      <p>Back cover</p>
+    </div>
+  </div>
+  <script src="lib/page-flip.browser.js"></script>
+  <script>
+    const flip = new St.PageFlip(document.getElementById('flipbook'), {
+      width: 320,
+      height: 460,
+      size: "fixed",
+      showCover: true,
+      drawShadow: true,
+      maxShadowOpacity: 0.8,
+      showPageCorners: true,
+      useMouseEvents: true
+    });
+    flip.loadFromHTML(document.querySelectorAll('.card-page'));
+    flip.getPage(0).setDensity('soft'); console.log('Page 0 density:', flip.getPage(0).getDensity());
+  </script>
+</body>
+</html>
